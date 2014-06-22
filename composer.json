@@ -19,7 +19,9 @@
         "sensio/framework-extra-bundle": "~3.0",
         "sensio/generator-bundle": "~2.3",
         "incenteev/composer-parameter-handler": "~2.0",
-        "sonata-project/admin-bundle": "dev-master"
+        "sonata-project/doctrine-mongodb-admin-bundle": "2.3.*@dev",
+        "sonata-project/admin-bundle": "2.3.*@dev",
+        "sonata-project/doctrine-orm-admin-bundle": "2.3.*@dev"
     },
     "scripts": {
         "post-install-cmd": [
@@ -37,6 +39,7 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
         ]
     },
+    "minimum-stability": "dev",
     "config": {
         "bin-dir": "bin"
     },

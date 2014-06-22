@@ -1,0 +1,9 @@
+parameters:
+#    archmage_admin.example.class: Archmage\AdminBundle\Example
+
+services:
+    sonata.admin.magic:
+        class: Archmage\AdminBundle\Admin\MagicAdmin        
+        tags:
+            - { name: archmage.core.magic, manager_type: orm, group: Core, label: Magic }
+        arguments: [null, Archmage\AdminBundle\Entity\Magic, SonataAdminBundle:CRUD]

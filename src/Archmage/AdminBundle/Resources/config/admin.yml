@@ -1,0 +1,12 @@
+# Archmage/AdminBundle/Resources/config/admin.yml
+services:
+    sonata.admin.magic:
+        class: Archmage\AdminBundle\Admin\MagicAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Core", label: "Magic" }
+        arguments:
+            - ~
+            - Archmage\AdminBundle\Entity\Magic
+            - ~
+        calls:
+            - [ setTranslationDomain, [ArchmageAdminBundle]]
