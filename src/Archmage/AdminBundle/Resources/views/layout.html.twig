@@ -1,0 +1,109 @@
+{% import _self as _this %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>{{ 'app.name'|trans }}</title>
+    {% block stylesheets %}
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    {% endblock %}
+    {% block stylesheets_custom %}
+        
+    {% endblock %}
+</head>
+<body>
+{% block body %}
+    <div class="container ph-container" id="container">
+        <div id="header">
+
+            <nav class="navbar navbar-default" role="navigation">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".ph-recovery-menu">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-logo" href="{{ path('homepage') }}" title="{{ 'app.name'|trans }}">
+                        <img src="{{ asset('bundles/arcanyshelpdesk/images/logo_small_mez2.jpg') }}" alt="{{ 'app.name'|trans }}">
+                    </a>
+                </div>
+            </nav>
+
+            <div class="row ph-header">
+                <div class="col-md-4">
+                    <h1>
+                        <a href="{{ path('homepage') }}" title="{{ 'app.name'|trans }}">
+                            <img src="{{ asset('bundles/arcanyshelpdesk/images/logo_small_mez2.jpg') }}" alt="{{ 'app.name'|trans }}">
+                        </a>
+                    </h1>
+                </div>
+
+                {% if is_granted('ROLE_NG O') %}
+                <div class="col-md-4 col-md-offset-4 header-user">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <small><span class="glyphicon glyphicon-user"></span>
+                                Logged in as:</small>
+                        </div>
+                    </div>
+                    <div class="row" style="margin: 5px 0;">
+                        {% if app.user.ngo is not null and app.user.ngo.logo %}
+                        <div class="col-md-2" style="padding-left:0;">
+                            <img src="{{ app.user.ngo.logo }}" style="min-width: 50px;width:100%;" alt="{{ app.user.ngo }}">
+                        </div>
+                        {% endif %}
+                        <div class="col-md-10" style="padding-left: 10px;">
+                            <strong>{{ app.user.name }} (<a href="{{ path('logout') }}" title="Logout">Logout</a>)</strong>
+                            <br>{{ app.user.ngo }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        live chat
+                    </div>
+                </div>
+                {% else %}
+                <div class="col-md-4 col-md-offset-4 header-user">
+                    <br />
+                    <a href="{{ path('login') }}" title="Sign In"  class="btn btn-primary">Sign In</a>
+                    <a href="{{ path('register') }}" title="Register" class="btn btn-success">Register</a>
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="row menu-container">
+                {% block nav_tabs %}
+                    {{ _this.nav_tabs() }}
+                {% endblock %}
+            </div>
+        </div>        
+        <div id="body">
+        {% block content %}
+content
+        {% endblock content %}
+        </div>
+    </div>
+    <!-- /container -->
+
+
+    <div class="container-fluid" id="footer-container">
+    </div>
+
+    {% block javascripts %}
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    {% endblock %}
+
+{% endblock body %}
+</body>
+</html>

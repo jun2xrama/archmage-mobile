@@ -1,26 +1,32 @@
 security:
     encoders:
-        Symfony\Component\Security\Core\User\User: plaintext
+        Archmage\AdminBundle\Entity\User: sha256
 
     role_hierarchy:
-        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUB: ROLE_USER
+        ROLE_ADMIN: ROLE_SUB
         ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     providers:
-        in_memory:
-            memory:
-                users:
-                    user:  { password: userpass, roles: [ 'ROLE_USER' ] }
-                    admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
+        main:
+            entity: { class: ArchmageAdminBundle:User, property: username }
+            
     firewalls:
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
             pattern: ^/
+            provider: main
+            form_login: 
+                always_use_default_target_path: true
+                default_target_path: /dashboard
             anonymous: ~
-            http_basic:
-                realm: "Secured Demo Area"
+            remember_me:
+                key:      "%secret%"
+                path:     /
+            logout: ~
+            
     access_control:
-        #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
-        #- { path: ^/_internal/secure, roles: IS_AUTHENTICATED_ANONYMOUSLY, ip: 127.0.0.1 }
+        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/.*, role: IS_AUTHENTICATED_ANONYMOUSLY }

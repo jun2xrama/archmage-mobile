@@ -1,9 +1,11 @@
 parameters:
+    archmage_admin.user_listener.class: Archmage\AdminBundle\EventListener\UserListener
 #    archmage_admin.example.class: Archmage\AdminBundle\Example
 
 services:
-    sonata.admin.magic:
-        class: Archmage\AdminBundle\Admin\MagicAdmin        
+    archmage_admin.user_listener:
+        class: %archmage_admin.user_listener.class%        
         tags:
-            - { name: archmage.core.magic, manager_type: orm, group: Core, label: Magic }
-        arguments: [null, Archmage\AdminBundle\Entity\Magic, SonataAdminBundle:CRUD]
+            - { name: doctrine.event_listener, event: "prePersist" }
+            - { name: doctrine.event_listener, event: "preUpdate" }
+        arguments: [@service_container]

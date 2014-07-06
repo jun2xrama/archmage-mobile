@@ -50,15 +50,20 @@ sonata_block:
 
 sonata_admin:
   security:
-    handler: sonata.admin.security.handler.noop
+    handler: sonata.admin.security.handler.role
   title:      Archmage Admin
-  title_logo: bundles/archmageadminbundle/images/logo_small.png
+  title_logo: bundles/archmageadmin/images/logo.jpg
+  templates:
+    # default global templates
+    layout:  ArchmageAdminBundle:Admin:standard_layout.html.twig
+    user_block:  ArchmageAdminBundle:Admin:user_block.html.twig
   dashboard:
     groups:
       core:
         label: Core
         items:
           - sonata.admin.magic
+          - sonata.admin.user
 
 doctrine:
     dbal:

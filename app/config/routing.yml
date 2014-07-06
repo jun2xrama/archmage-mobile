@@ -1,4 +1,9 @@
 # app/config/routing.yml
+archmage_admin:
+    resource: "@ArchmageAdminBundle/Controller/"
+    type:     annotation
+    prefix:   /
+    
 admin:
     resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
     prefix: /admin

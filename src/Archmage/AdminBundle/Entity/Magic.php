@@ -23,11 +23,12 @@ namespace Archmage\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Archmage\AdminBundle\Model\TimestamptableInterface;
 
 /**
  * @ORM\Entity
  */
-class Magic extends Timetable
+class Magic extends AbstractTimestamptable implements TimestamptableInterface
 {
     /**
      * @ORM\Id
@@ -37,10 +38,10 @@ class Magic extends Timetable
     protected $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=50)
      *
      * @Assert\NotBlank()
-     * @Assert\Length(min="10", max=255)
+     * @Assert\Length(min=10, max=50)
      */
     protected $name;
 

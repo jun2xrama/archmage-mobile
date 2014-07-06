@@ -1,0 +1,11 @@
+{% block user_block %}     
+    <li role="presentation">
+        {% if app.user is not null and is_granted('ROLE_ADMIN') %}
+        <a role="menuitem" tabindex="-1" href="{{ path('admin_archmage_admin_user_edit', {id:app.user.id}) }}">{{ 'Profile'|trans }}</a>
+        {% elseif app.user is not null and is_granted('ROLE_SUB') %}
+        <a role="menuitem" tabindex="-1" href="{{ path('admin_archmage_admin_user_edit', {id:app.user.id}) }}">{{ 'Profile'|trans }}</a>
+        {% endif %}
+    </li>
+    <li role="presentation" class="divider"></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="{{ path('logout') }}">{{ 'Logout'|trans }}</a></li>
+{% endblock user_block %}

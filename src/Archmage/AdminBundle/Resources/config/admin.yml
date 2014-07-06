@@ -10,3 +10,13 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [ArchmageAdminBundle]]
+    sonata.admin.user:
+        class: Archmage\AdminBundle\Admin\UserAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Core", label: "User" }
+        arguments:
+            - ~
+            - Archmage\AdminBundle\Entity\User
+            - ~
+        calls:
+            - [ setTranslationDomain, [ArchmageAdminBundle]]
